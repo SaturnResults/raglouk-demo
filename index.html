@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Raglo – Coastal Living</title>
+  <title>Raglo - Coastal Living</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
@@ -17,55 +17,61 @@
     }
     body { font-family: 'Inter', sans-serif; background: #fff; color: var(--black); overflow-x: hidden; }
 
-    /* ══ TOP ANNOUNCEMENT BAR ══ */
+    /* ══ TOP BAR ══ */
     .top-bar {
       background: #111; color: rgba(255,255,255,0.9);
       display: flex; align-items: center;
-      padding: 0 16px; height: 44px;
-      font-size: 12.5px; font-weight: 500;
-      position: relative; overflow: hidden;
+      padding: 0 14px; height: 42px; font-size: 12px; font-weight: 500;
     }
     .tb-arrow {
-      background: none; border: none; color: rgba(255,255,255,0.55);
-      cursor: pointer; font-size: 18px; padding: 0 8px;
-      flex-shrink: 0; transition: color .2s; z-index: 2;
+      background: none; border: none; color: rgba(255,255,255,0.5);
+      cursor: pointer; font-size: 16px; padding: 0 10px;
+      flex-shrink: 0; transition: color .2s;
     }
     .tb-arrow:hover { color: #fff; }
-    .tb-track {
-      flex: 1; overflow: hidden; position: relative; height: 100%;
-    }
-    .tb-slide {
+    .tb-track { flex: 1; overflow: hidden; position: relative; height: 100%; }
+    .tb-msg {
       position: absolute; inset: 0;
       display: flex; align-items: center; justify-content: center;
-      opacity: 0; transform: translateY(100%);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-      text-align: center; pointer-events: none;
-      white-space: nowrap;
+      opacity: 0; transform: translateY(8px);
+      transition: opacity 0.35s, transform 0.35s;
+      text-align: center; pointer-events: none; white-space: nowrap;
     }
-    .tb-slide.active {
-      opacity: 1; transform: translateY(0); pointer-events: auto;
-    }
-    .tb-slide a { color: #fff; }
-    .tb-dots {
-      display: flex; gap: 5px; align-items: center;
-      margin-left: 10px; flex-shrink: 0;
-    }
-    .tb-dot {
-      width: 5px; height: 5px; border-radius: 50%;
-      background: rgba(255,255,255,0.3); cursor: pointer;
-      transition: background .3s;
-    }
-    .tb-dot.active { background: #fff; }
+    .tb-msg.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .tb-msg a { color: #fff; text-decoration: underline; }
 
-    /* ══ NAV — 3-column grid, works on all sizes ══ */
+    /* ══ MOBILE MENU OVERLAY ══ */
+    .mobile-menu {
+      position: fixed; inset: 0; z-index: 999;
+      background: var(--nav-bg);
+      display: flex; flex-direction: column;
+      padding: 28px 32px 48px;
+      transform: translateX(-100%);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .mobile-menu.open { transform: translateX(0); }
+    .mobile-menu-close {
+      background: none; border: none; cursor: pointer;
+      font-size: 28px; color: var(--black); align-self: flex-start;
+      line-height: 1; padding: 0; margin-bottom: 40px;
+    }
+    .mobile-menu nav-links-mob {
+      display: flex; flex-direction: column;
+    }
+    .mob-link {
+      display: block; text-decoration: none; color: var(--black);
+      font-size: 38px; font-weight: 400; line-height: 1;
+      padding: 18px 0; border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .mob-link:first-of-type { border-top: 1px solid rgba(0,0,0,0.07); }
+    .mob-link:hover { opacity: 0.5; }
+
+    /* ══ NAV ══ */
     nav {
       background: var(--nav-bg);
       border-bottom: 1px solid rgba(0,0,0,0.06);
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      padding: 0 18px;
-      height: 82px;
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      align-items: center; padding: 0 18px; height: 82px;
       position: sticky; top: 0; z-index: 100;
     }
     .nav-left { display: flex; align-items: center; gap: 16px; }
@@ -77,45 +83,40 @@
     }
     .nav-icon-btn:hover { opacity: 0.5; }
     .nav-logo img { height: 70px; width: auto; display: block; }
-    .nav-links {
-      display: none; gap: 26px; list-style: none;
-    }
+    .nav-links { display: none; gap: 26px; list-style: none; }
     .nav-links a { color: var(--black); text-decoration: none; font-size: 14px; font-weight: 500; }
     .nav-links a:hover { opacity: 0.6; }
     @media (min-width: 768px) {
-      nav { padding: 0 36px; grid-template-columns: 1fr auto 1fr; }
+      nav { padding: 0 36px; }
       .nav-links { display: flex; }
-      .hamburger { display: none; }
+      .hamburger { display: none !important; }
       .nav-logo img { height: 76px; }
     }
 
     /* ══ HERO ══ */
     .hero-wrap { padding: 14px 12px 0; }
     @media (min-width: 768px) { .hero-wrap { padding: 24px 32px 0; } }
-
     .hero {
-      position: relative; width: 100%;
-      border-radius: 20px; overflow: hidden;
+      position: relative; width: 100%; border-radius: 20px; overflow: hidden;
       aspect-ratio: 4/5;
     }
     @media (min-width: 768px) { .hero { aspect-ratio: 16/7; border-radius: 24px; } }
-
     .slide {
-      position: absolute; inset: 0;
-      opacity: 0; transition: opacity 0.9s ease; pointer-events: none;
+      position: absolute; inset: 0; opacity: 0;
+      transition: opacity 0.9s ease; pointer-events: none;
     }
     .slide.active { opacity: 1; pointer-events: auto; }
     .slide img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
     .slide-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.25) 55%, rgba(0,0,0,0) 100%);
+      background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.22) 55%, rgba(0,0,0,0) 100%);
     }
     .slide-content {
       position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 24px 22px 80px;
+      padding: 22px 22px 90px;
     }
     @media (min-width: 768px) {
-      .slide-content { padding: 48px 56px 80px; max-width: 640px; right: auto; }
+      .slide-content { padding: 48px 56px 88px; max-width: 640px; right: auto; }
     }
     .slide-eyebrow {
       font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
@@ -124,7 +125,7 @@
     .slide-title {
       font-size: clamp(26px, 6.5vw, 58px); font-weight: 900;
       line-height: 1.05; text-transform: uppercase; color: #fff;
-      margin-bottom: 18px; text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      margin-bottom: 16px; text-shadow: 0 2px 12px rgba(0,0,0,0.3);
     }
     .btn-hero {
       display: flex; align-items: center; justify-content: center; gap: 8px;
@@ -135,49 +136,41 @@
     @media (min-width: 768px) { .btn-hero { display: inline-flex; } }
     .btn-hero:hover { background: #e8e8e8; }
 
-    /* Dots — bottom left, above button */
-    .slider-dots {
-      position: absolute; bottom: 50px; left: 22px;
-      display: flex; gap: 8px; z-index: 10;
+    /* Hero bottom bar: dots centre, arrows either side */
+    .hero-bottom {
+      position: absolute; bottom: 20px; left: 0; right: 0;
+      display: flex; align-items: center; justify-content: center;
+      gap: 12px; z-index: 10; padding: 0 20px;
     }
-    @media (min-width: 768px) { .slider-dots { left: 56px; bottom: 44px; } }
+    .slider-dots { display: flex; gap: 7px; align-items: center; }
     .dot {
       width: 9px; height: 9px; border-radius: 50%;
       background: rgba(255,255,255,0.35); border: 1.5px solid rgba(255,255,255,0.65);
       cursor: pointer; transition: background .3s; padding: 0;
     }
     .dot.active { background: #fff; }
-
-    /* Arrows — desktop only, top-right of hero */
-    .slider-arrows {
-      display: none;
-      position: absolute; bottom: 32px; right: 32px;
-      gap: 8px; z-index: 10;
-    }
-    @media (min-width: 768px) { .slider-arrows { display: flex; } }
     .sarrow {
       background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
-      color: #fff; border-radius: 50%; width: 40px; height: 40px;
+      color: #fff; border-radius: 50%; width: 36px; height: 36px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 16px; cursor: pointer; backdrop-filter: blur(6px);
-      transition: background .2s;
+      font-size: 15px; cursor: pointer; backdrop-filter: blur(6px);
+      transition: background .2s; flex-shrink: 0;
     }
     .sarrow:hover { background: rgba(255,255,255,0.3); }
 
     /* ══ FEATURES ══ */
     .features-strip {
-      display: flex; overflow-x: auto;
-      border-bottom: 1px solid var(--border);
+      display: flex; overflow-x: auto; border-bottom: 1px solid var(--border);
       -webkit-overflow-scrolling: touch;
     }
     .features-strip::-webkit-scrollbar { display: none; }
     .feature-item {
       flex: 0 0 auto; display: flex; align-items: center; gap: 9px;
-      padding: 15px 18px; font-size: 12px; font-weight: 500;
+      padding: 14px 18px; font-size: 12px; font-weight: 500;
       white-space: nowrap; color: #333; border-right: 1px solid var(--border);
     }
     .feature-item:last-child { border-right: none; }
-    .feat-icon { font-size: 16px; }
+    .feat-icon { font-size: 15px; }
     @media (min-width: 768px) {
       .features-strip { padding: 0 32px; }
       .feature-item { flex: 1; justify-content: center; }
@@ -201,8 +194,7 @@
     @media (min-width: 768px) { .products-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
     .product-card {
       border-radius: 16px; overflow: hidden; background: var(--light);
-      cursor: pointer; transition: transform .25s, box-shadow .25s;
-      border: 1px solid var(--border);
+      cursor: pointer; transition: transform .25s, box-shadow .25s; border: 1px solid var(--border);
     }
     .product-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
     .product-img-wrap { position: relative; width: 100%; aspect-ratio: 3/4; overflow: hidden; background: #e8e8e8; }
@@ -230,9 +222,7 @@
       position: relative; min-height: 320px; background: #0a1628;
       display: flex; flex-direction: column; justify-content: flex-end; padding: 36px 26px;
     }
-    @media (min-width: 768px) {
-      .story-section { margin: 0 32px 72px; border-radius: 24px; padding: 64px 64px; min-height: 400px; }
-    }
+    @media (min-width: 768px) { .story-section { margin: 0 32px 72px; border-radius: 24px; padding: 64px 64px; min-height: 400px; } }
     .story-bg { position: absolute; inset: 0; }
     .story-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.35; }
     .story-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(10,22,40,0.93) 0%, rgba(10,22,40,0.5) 100%); }
@@ -251,10 +241,7 @@
     /* ══ COLLECTIONS ══ */
     .collections-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
     @media (min-width: 500px) { .collections-grid { grid-template-columns: repeat(2, 1fr); } }
-    .coll-card {
-      border-radius: 16px; overflow: hidden; position: relative;
-      aspect-ratio: 4/3; cursor: pointer; background: #ddd;
-    }
+    .coll-card { border-radius: 16px; overflow: hidden; position: relative; aspect-ratio: 4/3; cursor: pointer; background: #ddd; }
     .coll-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
     .coll-card:hover img { transform: scale(1.04); }
     .coll-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 55%); }
@@ -278,8 +265,7 @@
     .btn-dark {
       display: inline-flex; align-items: center; gap: 8px;
       background: #111; color: #fff; text-decoration: none;
-      font-size: 13px; font-weight: 700; padding: 14px 26px; border-radius: 100px;
-      align-self: flex-start;
+      font-size: 13px; font-weight: 700; padding: 14px 26px; border-radius: 100px; align-self: flex-start;
     }
     .btn-dark:hover { background: #333; }
 
@@ -301,42 +287,48 @@
     .footer-socials a:hover { background: rgba(255,255,255,0.14); }
     .footer-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 40px; }
     @media (min-width: 768px) { .footer-cols { grid-template-columns: 1fr 1fr 1fr; } }
-    .footer-col h4 {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; color: rgba(255,255,255,0.85); margin-bottom: 16px;
-    }
+    .footer-col h4 { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.85); margin-bottom: 16px; }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .footer-col ul a { color: #666; text-decoration: none; font-size: 13px; }
     .footer-col ul a:hover { color: #fff; }
     .footer-bottom {
       border-top: 1px solid rgba(255,255,255,0.06); padding-top: 22px;
-      display: flex; flex-wrap: wrap; gap: 8px;
-      justify-content: space-between; font-size: 12px; color: #555;
+      display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; font-size: 12px; color: #555;
     }
   </style>
 </head>
 <body>
 
-<!-- ══ TOP ANNOUNCEMENT BAR ══ -->
+<!-- ══ MOBILE MENU OVERLAY ══ -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="menuClose">&#x2715;</button>
+  <a class="mob-link" href="#">Home</a>
+  <a class="mob-link" href="https://raglouk.com/collections/all">Shop</a>
+  <a class="mob-link" href="https://raglouk.com/pages/contact">Contact</a>
+  <a class="mob-link" href="https://raglouk.com/blogs/news">Our Story</a>
+</div>
+
+<!-- ══ TOP BAR ══ -->
 <div class="top-bar">
   <button class="tb-arrow" id="tbPrev">&#8592;</button>
   <div class="tb-track">
-    <div class="tb-slide active">🌊 &nbsp;10% off your first order — use code <strong>SUMMER</strong></div>
-    <div class="tb-slide">🚚 &nbsp;Free UK shipping on all orders</div>
-    <div class="tb-slide">🌿 &nbsp;New in: The Manu Collection 2025</div>
-    <div class="tb-slide">A question? <a href="https://raglouk.com/pages/contact" style="text-decoration:underline">Visit our contact page</a></div>
-    <div class="tb-slide">🎁 &nbsp;Gift wrapping available at checkout</div>
+    <div class="tb-msg active">10% off your first order. Use code <strong>SUMMER</strong></div>
+    <div class="tb-msg">Free UK shipping on all orders</div>
+    <div class="tb-msg">New in: The Manu Collection</div>
+    <div class="tb-msg"><a href="https://raglouk.com/pages/contact">Got a question? Contact us</a></div>
+    <div class="tb-msg">Gift wrapping available</div>
   </div>
-  <div class="tb-dots" id="tbDots"></div>
   <button class="tb-arrow" id="tbNext">&#8594;</button>
 </div>
 
 <!-- ══ NAV ══ -->
 <nav>
   <div class="nav-left">
-    <button class="nav-icon-btn hamburger" title="Menu">
+    <button class="nav-icon-btn hamburger" id="menuOpen" title="Menu">
       <svg width="22" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 22 15">
-        <line x1="0" y1="1" x2="22" y2="1"/><line x1="0" y1="7.5" x2="22" y2="7.5"/><line x1="0" y1="14" x2="22" y2="14"/>
+        <line x1="0" y1="1" x2="22" y2="1"/>
+        <line x1="0" y1="7.5" x2="22" y2="7.5"/>
+        <line x1="0" y1="14" x2="22" y2="14"/>
       </svg>
     </button>
     <ul class="nav-links">
@@ -354,11 +346,12 @@
   </div>
 
   <div class="nav-right">
-    <button class="nav-icon-btn" title="Search">
-      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-    </button>
     <button class="nav-icon-btn" title="Cart">
-      <svg width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <svg width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <path d="M16 10a4 4 0 01-8 0"/>
+      </svg>
     </button>
   </div>
 </nav>
@@ -371,9 +364,9 @@
       <img src="hero1 .webp" alt="Raglo Coastal Lifestyle" />
       <div class="slide-overlay"></div>
       <div class="slide-content">
-        <div class="slide-eyebrow">The Manu Collection — 2025</div>
+        <div class="slide-eyebrow">The Manu Collection 2025</div>
         <h1 class="slide-title">Experience<br>Unparalleled<br>Coastal Style</h1>
-        <a href="https://raglouk.com/collections/all" class="btn-hero">Shop Now →</a>
+        <a href="https://raglouk.com/collections/all" class="btn-hero">Shop Now</a>
       </div>
     </div>
 
@@ -382,8 +375,8 @@
       <div class="slide-overlay"></div>
       <div class="slide-content">
         <div class="slide-eyebrow">Surf Culture Meets Urban Style</div>
-        <h1 class="slide-title">Crafted for<br>the Coast<br>& Beyond</h1>
-        <a href="https://raglouk.com/collections/manu-collection" class="btn-hero">The Manu Shirt →</a>
+        <h1 class="slide-title">Crafted for<br>the Coast<br>and Beyond</h1>
+        <a href="https://raglouk.com/collections/manu-collection" class="btn-hero">The Manu Shirt</a>
       </div>
     </div>
 
@@ -392,27 +385,28 @@
       <div class="slide-overlay"></div>
       <div class="slide-content">
         <div class="slide-eyebrow">New In</div>
-        <h1 class="slide-title">The Manu<br>Shirt —<br>Navy Blue</h1>
-        <a href="https://raglouk.com/products/the-manu-shirt-navy-blue-copy" class="btn-hero">Shop — £75 →</a>
+        <h1 class="slide-title">The Manu<br>Shirt in<br>Navy Blue</h1>
+        <a href="https://raglouk.com/products/the-manu-shirt-navy-blue-copy" class="btn-hero">Shop Now - £75</a>
       </div>
     </div>
 
-    <div class="slider-dots" id="heroDots">
-      <button class="dot active" onclick="goToSlide(0)"></button>
-      <button class="dot" onclick="goToSlide(1)"></button>
-      <button class="dot" onclick="goToSlide(2)"></button>
-    </div>
-    <div class="slider-arrows">
+    <div class="hero-bottom">
       <button class="sarrow" onclick="changeSlide(-1)">&#8592;</button>
+      <div class="slider-dots" id="heroDots">
+        <button class="dot active" onclick="goToSlide(0)"></button>
+        <button class="dot" onclick="goToSlide(1)"></button>
+        <button class="dot" onclick="goToSlide(2)"></button>
+      </div>
       <button class="sarrow" onclick="changeSlide(1)">&#8594;</button>
     </div>
+
   </div>
 </div>
 
 <!-- ══ FEATURES ══ -->
 <div class="features-strip">
   <div class="feature-item"><span class="feat-icon">🚚</span>Free UK Shipping</div>
-  <div class="feature-item"><span class="feat-icon">↩️</span>Easy Returns</div>
+  <div class="feature-item"><span class="feat-icon">↩</span>Easy Returns</div>
   <div class="feature-item"><span class="feat-icon">🌊</span>Coastal Inspired</div>
   <div class="feature-item"><span class="feat-icon">🌿</span>Premium Cotton</div>
   <div class="feature-item"><span class="feat-icon">⭐</span>Made to Last</div>
@@ -423,9 +417,9 @@
   <div class="section-header">
     <div>
       <h2 class="section-title">The Manu Collection</h2>
-      <p class="section-sub">Premium cotton — surf culture meets urban life</p>
+      <p class="section-sub">Premium cotton. Surf culture meets urban life.</p>
     </div>
-    <a href="https://raglouk.com/collections/all" class="view-all">View All →</a>
+    <a href="https://raglouk.com/collections/all" class="view-all">View All</a>
   </div>
   <div class="products-grid">
     <div class="product-card">
@@ -435,9 +429,9 @@
       </div>
       <div class="product-info">
         <div class="product-name">The Manu Shirt</div>
-        <div class="product-sub">Deep Ocean Blue · Premium Cotton</div>
+        <div class="product-sub">Deep Ocean Blue. Premium Cotton.</div>
         <div class="product-footer">
-          <div class="product-price">£75</div>
+          <div class="product-price">£75.00</div>
           <button class="add-btn" onclick="window.location='https://raglouk.com/products/the-manu-shirt-deep-ocean-blue'">Shop</button>
         </div>
       </div>
@@ -448,9 +442,9 @@
       </div>
       <div class="product-info">
         <div class="product-name">The Manu Shirt</div>
-        <div class="product-sub">Navy Blue · Premium Cotton</div>
+        <div class="product-sub">Navy Blue. Premium Cotton.</div>
         <div class="product-footer">
-          <div class="product-price">£75</div>
+          <div class="product-price">£75.00</div>
           <button class="add-btn" onclick="window.location='https://raglouk.com/products/the-manu-shirt-navy-blue-copy'">Shop</button>
         </div>
       </div>
@@ -461,9 +455,9 @@
       </div>
       <div class="product-info">
         <div class="product-name">The Manu Shirt</div>
-        <div class="product-sub">Sandshell Beige · Premium Cotton</div>
+        <div class="product-sub">Sandshell Beige. Premium Cotton.</div>
         <div class="product-footer">
-          <div class="product-price">£75</div>
+          <div class="product-price">£75.00</div>
           <button class="add-btn" onclick="window.location='https://raglouk.com/products/the-manu-shirt-sandshell-beige'">Shop</button>
         </div>
       </div>
@@ -478,10 +472,10 @@
   </div>
   <div class="story-overlay"></div>
   <div class="story-content">
-    <div class="story-label">Founded 2025 · Raglan, New Zealand</div>
+    <div class="story-label">Founded 2025 - Raglan, New Zealand</div>
     <h2 class="story-title">Born on the <span>Coast</span>,<br>Built for Life</h2>
-    <p class="story-body">Raglo is named after Raglan — a coastal town in New Zealand where life moves to the rhythm of the surf. We bring that spirit to the UK, celebrating our incredible coastline and the lifestyle that surrounds it.</p>
-    <a href="https://raglouk.com/blogs/news" class="btn-story">Our Story →</a>
+    <p class="story-body">Raglo is named after Raglan, a coastal town in New Zealand where life moves to the rhythm of the surf. We bring that spirit to the UK, celebrating our incredible coastline and the lifestyle that surrounds it.</p>
+    <a href="https://raglouk.com/blogs/news" class="btn-story">Our Story</a>
   </div>
 </div>
 
@@ -490,7 +484,7 @@
   <div class="section-header">
     <div>
       <h2 class="section-title">Explore the Range</h2>
-      <p class="section-sub">Versatile pieces for coast & city</p>
+      <p class="section-sub">Versatile pieces for coast and city</p>
     </div>
   </div>
   <div class="collections-grid">
@@ -513,14 +507,14 @@
 <div class="why-box">
   <div class="why-inner">
     <div class="why-label">Why Raglo</div>
-    <h2 class="why-title">Crafted for every adventure — coast to city</h2>
+    <h2 class="why-title">Crafted for every adventure, coast to city</h2>
     <div class="why-grid">
-      <div><div class="why-item-icon">🧵</div><div class="why-item-name">Premium Cotton</div><div class="why-item-desc">Sustainably crafted for comfort all day</div></div>
-      <div><div class="why-item-icon">🏄</div><div class="why-item-name">Surf Culture</div><div class="why-item-desc">Inspired by the waves of Raglan, NZ</div></div>
-      <div><div class="why-item-icon">🏙️</div><div class="why-item-name">Urban Versatility</div><div class="why-item-desc">Adaptable layering for any setting</div></div>
-      <div><div class="why-item-icon">🪡</div><div class="why-item-name">Quality Details</div><div class="why-item-desc">Embroidered buttons & interior pockets</div></div>
+      <div><div class="why-item-icon">🧵</div><div class="why-item-name">Premium Cotton</div><div class="why-item-desc">Sustainably crafted for all-day comfort</div></div>
+      <div><div class="why-item-icon">🏄</div><div class="why-item-name">Surf Culture</div><div class="why-item-desc">Inspired by the waves of Raglan, New Zealand</div></div>
+      <div><div class="why-item-icon">🏙️</div><div class="why-item-name">Urban Versatility</div><div class="why-item-desc">Adaptable layering for any occasion</div></div>
+      <div><div class="why-item-icon">🪡</div><div class="why-item-name">Quality Details</div><div class="why-item-desc">Embroidered buttons and interior pockets</div></div>
     </div>
-    <a href="https://raglouk.com/collections/all" class="btn-dark">Shop The Collection →</a>
+    <a href="https://raglouk.com/collections/all" class="btn-dark">Shop the Collection</a>
   </div>
 </div>
 
@@ -528,7 +522,7 @@
 <footer>
   <div class="footer-brand">
     <img src="https://raglouk.com/cdn/shop/files/Raglo_-_2_08ca1513-0a71-45b4-afc9-3e26aeb41d9b.png" alt="Raglo" style="height:62px;width:auto;filter:invert(1);" />
-    <p>Named after Raglan, NZ. Bringing coastal living to the UK — premium apparel crafted for surf, city, and everything in between.</p>
+    <p>Named after Raglan, New Zealand. Bringing coastal living to the UK. Premium apparel crafted for surf, city, and everything in between.</p>
     <div class="footer-socials">
       <a href="https://www.instagram.com/raglouk" title="Instagram">
         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
@@ -559,7 +553,7 @@
         <li><a href="https://raglouk.com/blogs/news">Our Story</a></li>
         <li><a href="https://raglouk.com/policies/shipping-policy">Shipping</a></li>
         <li><a href="https://raglouk.com/policies/refund-policy">Returns</a></li>
-        <li><a href="https://raglouk.com/policies/privacy-policy">Privacy</a></li>
+        <li><a href="https://raglouk.com/policies/privacy-policy">Privacy Policy</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -573,12 +567,12 @@
   </div>
   <div class="footer-bottom">
     <span>© 2025 Raglo. All rights reserved.</span>
-    <span>Built for the coast 🌊</span>
+    <span>Built for the coast</span>
   </div>
 </footer>
 
 <script>
-  /* ── Hero slider ── */
+  /* Hero slider */
   let current = 0;
   const slides = document.querySelectorAll('.slide');
   const heroDots = document.querySelectorAll('#heroDots .dot');
@@ -594,29 +588,24 @@
   function changeSlide(dir) { goToSlide(current + dir); }
   setInterval(() => changeSlide(1), 5500);
 
-  /* ── Top bar announcements ── */
-  const tbSlides = document.querySelectorAll('.tb-slide');
-  const tbDotsEl = document.getElementById('tbDots');
+  /* Top bar */
+  const tbMsgs = document.querySelectorAll('.tb-msg');
   let tbCurrent = 0;
 
-  tbSlides.forEach((_, i) => {
-    const d = document.createElement('button');
-    d.className = 'tb-dot' + (i === 0 ? ' active' : '');
-    d.onclick = () => goTb(i);
-    tbDotsEl.appendChild(d);
-  });
-
   function goTb(n) {
-    tbSlides[tbCurrent].classList.remove('active');
-    tbDotsEl.children[tbCurrent].classList.remove('active');
-    tbCurrent = ((n % tbSlides.length) + tbSlides.length) % tbSlides.length;
-    tbSlides[tbCurrent].classList.add('active');
-    tbDotsEl.children[tbCurrent].classList.add('active');
+    tbMsgs[tbCurrent].classList.remove('active');
+    tbCurrent = ((n % tbMsgs.length) + tbMsgs.length) % tbMsgs.length;
+    tbMsgs[tbCurrent].classList.add('active');
   }
-
   document.getElementById('tbPrev').onclick = () => goTb(tbCurrent - 1);
   document.getElementById('tbNext').onclick = () => goTb(tbCurrent + 1);
   setInterval(() => goTb(tbCurrent + 1), 4000);
+
+  /* Mobile menu */
+  const menu = document.getElementById('mobileMenu');
+  document.getElementById('menuOpen').onclick = () => menu.classList.add('open');
+  document.getElementById('menuClose').onclick = () => menu.classList.remove('open');
+  menu.addEventListener('click', e => { if (e.target === menu) menu.classList.remove('open'); });
 </script>
 </body>
 </html>
